@@ -121,8 +121,8 @@ class Text(Masker):
             sep_token = getattr_silent(self.tokenizer, "sep_token")
             for i, v in enumerate(mask):
                 # mask ignores separator tokens and keeps them unmasked
-                if v or sep_token == self._segments_s[i]:
-                    out_parts.append(self._segments_s[i])
+                if v or sep_token == self._segments_s[i].strip():
+                    out_parts.append(" " + self._segments_s[i])
                     is_previous_appended_token_mask_token = False
                 else:
                     if not self.collapse_mask_token or (self.collapse_mask_token and not is_previous_appended_token_mask_token):
